@@ -1,14 +1,14 @@
-## Задачи
+## Tasks
 
-1. Подключить и настроить redux
-2. На главной странице вывести статьи с постраничным разбиением (GET: /api/article?limit=1&offset=2)
-3. Сделать фильтрацию статей по дате (date range) и поиск названию
-4. Создать форму добавления новой статьи (POST: /api/article). После добавления новая статья должна появиться в списке сверху
-5. Добавить кнопку удаления статьи (удаляет только из redux-стора)
-6. При клике на заголовок статьи должна открываться ее страница. Использовать для этого react-router. Полный объект статьи можно запросить через (GET: /api/article/:id)
-7. На странице статьи внизу вывести кнопку показывающую / скрывающую комментарии (текст кнопки тоже меняется). Комментарии можно запросить через (GET: /api/comment?article=articleId)
-8. Создать форму добавления нового комментария к статье от анонимного пользователя. (POST: /api/comment)
-9. При ajax запросах отображать loader-индикатор
+1. Add Redux
+2. Show articles and pagination on the main page. `(GET: /api/article?limit=1&offset=2)`
+3. Create filter articles by date (date rage) and search by names.
+4. Create a form for adding a new article `(POST: /api/article)`. After adding, the article should be the first.
+5. Create the remove button (remove only from redux-store).
+6. The title should show the article. Use react-router. You can get the object using `(GET: /api/article/:id)`
+7. Add "show/hide comments". You can get comments using `(GET: /api/comment?article=articleId)`
+8. Create a form for adding a new comment `(POST: /api/comment)`
+9. When you use ajax requests, use a loading indicator
 
 ## Команды
 
