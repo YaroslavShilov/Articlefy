@@ -1,0 +1,27 @@
+{
+  "name": "training-project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "frontend": "yarn workspace @training-project/frontend",
+    "backend": "yarn workspace @training-project/backend",
+    "start": "concurrently \"yarn frontend start\" \"yarn backend start\""
+  },
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "prettier": {
+    "printWidth": 120,
+    "useTabs": false,
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "trailingComma": "es5",
+    "arrowParens": "always"
+  }
+}
