@@ -1,0 +1,1 @@
+{"version":3,"file":"289.611a823176.css","mappings":"AAAA;EACE,yBAAyB;AAC3B","sources":["webpack://articlefy/./src/components/muchMoreCode.css"],"sourcesContent":[".muchMoreCode {\r\n  outline: 2px solid yellow;\r\n}\r\n"],"names":[],"sourceRoot":""}

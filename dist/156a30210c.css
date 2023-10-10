@@ -1,0 +1,18 @@
+.item {
+  outline: 1px solid red;
+}
+
+//change this code
+body * {
+  font-family: 'PixelifySans', sans-serif;
+}
+
+@font-face {
+  font-family: 'PixelifySans';
+  src: url(fonts/78dfe66b4f.ttf) format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+/*# sourceMappingURL=156a30210c.css.map*/

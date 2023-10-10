@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "lib": ["ES7", "DOM"],
+    // Type Checking Configuration
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitThis": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitOverride": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+
+    // Strict Rules - v4.8
+    "alwaysStrict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "useUnknownInCatchVariables": true,
+
+    // Modules Configuration
+    "baseUrl": "./",
+    "module": "ES2022",
+    "moduleResolution": "node",
+
+    // Language and Environment Configuration
+    "jsx": "react",
+
+    // Interop Constraints Configuration
+    "esModuleInterop": true,
+    "isolatedModules": true
+  },
+  "include": ["src/**/*", "lib.d.ts"],
+  "exclude": ["node_modules"],
+  "allow-env": true,
+  "enable-env": true
+}
