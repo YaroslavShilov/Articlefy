@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  font: 400 18px/24px "EB Garamond", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
