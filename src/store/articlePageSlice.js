@@ -1,19 +1,29 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { validate } from '../utils'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { DATA } from '../data';
+// import { validate } from '../utils';
 
 export const fetchArticle = createAsyncThunk('articlePage/fetchArticle', async (id, { rejectWithValue, dispatch }) => {
   try {
-    const response = await fetch(`/api/article/${id}`)
+    /* local server, changed this code to local storage
+    const response = await fetch(`/api/article/${id}`);
 
-    validate(response, "Sorry, we can't find this article, try another one please")
+    validate(response, "Sorry, we can't find this article, try another one please");
 
-    const data = await response.json()
+    const data = await response.json();
 
-    dispatch(addArticle(data))
+    dispatch(addArticle(data));*/
+
+    let data = JSON.parse(localStorage.getItem('article'));
+    if (!data) {
+      localStorage.setItem('article', JSON.stringify(DATA.articles));
+      data = DATA.articles;
+    }
+    const article = data.find((article) => id === article.id);
+    dispatch(addArticle(article));
   } catch (err) {
-    return rejectWithValue(err.message)
+    return rejectWithValue(err.message);
   }
-})
+});
 
 const articlePageSlice = createSlice({
   name: 'articlePage',
@@ -24,23 +34,23 @@ const articlePageSlice = createSlice({
   },
   reducers: {
     addArticle: (state, action) => {
-      state.item = action.payload
+      state.item = action.payload;
     },
   },
   extraReducers: {
     [fetchArticle.pending]: (state) => {
-      state.loading = true
+      state.loading = true;
     },
     [fetchArticle.fulfilled]: (state) => {
-      state.loading = false
+      state.loading = false;
     },
     [fetchArticle.rejected]: (state, action) => {
-      state.loading = false
-      state.error = action.payload
+      state.loading = false;
+      state.error = action.payload;
     },
   },
-})
+});
 
-const { addArticle } = articlePageSlice.actions
+const { addArticle } = articlePageSlice.actions;
 
-export default articlePageSlice.reducer
+export default articlePageSlice.reducer;

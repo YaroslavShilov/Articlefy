@@ -1,79 +1,79 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { fetchArticle } from '../store/articlePageSlice'
-import { Article, ArticleType } from '../components/Article'
-import { Loader } from '../components/Loader'
-import styled from 'styled-components'
-import { RootState } from '../store/store'
-import { Comment, CommentType } from '../components/Comment'
-import { fetchComments } from '../store/commentsSlice'
-import { CreateComment } from '../components/CreateComment'
-import { Modal } from '../components/Modal'
-import { deleteArticle } from '../store/articlesSlice'
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { fetchArticle } from '../store/articlePageSlice';
+import { Article, ArticleType } from '../components/Article';
+import { Loader } from '../components/Loader';
+import styled from 'styled-components';
+import { RootState } from '../store/store';
+import { Comment, CommentType } from '../components/Comment';
+import { fetchComments } from '../store/commentsSlice';
+import { CreateComment } from '../components/CreateComment';
+import { Modal } from '../components/Modal';
+import { deleteArticle } from '../store/articlesSlice';
 
 //BEGIN TODO: Put this to it's slice
-
 interface articlePageType {
-  item: ArticleType | null
-  loading: boolean
-  error: string | null
+  item: ArticleType | null;
+  loading: boolean;
+  error: string | null;
 }
 
 interface CommentsType {
-  list: CommentType[] | null
-  loading: boolean
-  error: string | null
+  list: CommentType[] | null;
+  loading: boolean;
+  error: string | null;
 }
 //END TODO: Put this to it's slice
 
-export const ArticlePage = () => {
-  const { id } = useParams()
+const ArticlePage = () => {
+  const { id } = useParams();
   const {
     articlePage,
     comments,
     articles: { deleting },
   }: {
-    articlePage: articlePageType
-    comments: CommentsType
-    articles: { deleting: boolean }
-  } = useAppSelector<RootState>((state) => state)
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+    articlePage: articlePageType;
+    comments: CommentsType;
+    articles: { deleting: boolean };
+  } = useAppSelector<RootState>((state) => state);
 
-  const [deleteModal, setDeleteModal] = useState(false)
-  const [accepted, setAccepted] = useState(false)
-  const [showComments, setShowComments] = useState(false)
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const showCommentsHandler = () => setShowComments((state) => !state)
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [accepted, setAccepted] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+
+  const showCommentsHandler = () => setShowComments((state) => !state);
 
   const deleteArticleHandler = () => {
     //@ts-ignore
-    dispatch(deleteArticle(id))
-    setAccepted(true)
-  }
+    dispatch(deleteArticle(id));
+    setAccepted(true);
+  };
 
   useEffect(() => {
     if (deleteModal && !deleting && accepted) {
-      navigate('/')
+      navigate('/');
     }
-  }, [deleteModal, deleting, navigate, accepted])
+  }, [deleteModal, deleting, navigate, accepted]);
 
   useEffect(() => {
     //@ts-ignore
-    dispatch(fetchArticle(id))
-  }, [id, dispatch])
+    dispatch(fetchArticle(id));
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (showComments) {
       //@ts-ignore
-      dispatch(fetchComments(id))
+      dispatch(fetchComments(id));
     }
-  }, [id, dispatch, showComments])
+  }, [id, dispatch, showComments]);
 
-  if (articlePage.error) return <h2 style={{ textAlign: 'center' }}>{articlePage.error}</h2>
+  if (articlePage.error) return <h2 style={{ textAlign: 'center' }}>{articlePage.error}</h2>;
 
-  if (articlePage.loading || !articlePage.item) return <Loader />
+  if (articlePage.loading || !articlePage.item) return <Loader />;
 
   return (
     <React.Fragment>
@@ -136,12 +136,14 @@ export const ArticlePage = () => {
         <button onClick={() => setDeleteModal(true)}>Delete this article</button>
       </StyledRemove>
     </React.Fragment>
-  )
-}
+  );
+};
+
+export default ArticlePage;
 
 const StyledComments = styled.div`
   margin-top: 16px;
-`
+`;
 
 const StyledCommentsHeader = styled.div`
   display: flex;
@@ -163,23 +165,25 @@ const StyledCommentsHeader = styled.div`
 
   h3 {
     margin: 0 20px 0 0;
-    font: 700 18px/26px 'EB Garamond', serif;
+    font:
+      700 18px/26px 'EB Garamond',
+      serif;
   }
 
   svg {
     display: block;
     width: 20px;
 
-    transform: ${(props) => (props.theme.active ? 'rotate(180deg)' : 'none')};
+    transform: ${(props) => (props.theme['active'] ? 'rotate(180deg)' : 'none')};
   }
-`
+`;
 
 const StyledCommentsList = styled.div`
   padding: 20px;
 
   border: 1px solid #d9d9d9;
   border-top-width: 0;
-`
+`;
 
 const StyledComment = styled(Comment)`
   &:not(:first-of-type) {
@@ -190,7 +194,7 @@ const StyledComment = styled(Comment)`
     padding-bottom: 16px;
     border-bottom: 1px solid #d9d9d9;
   }
-`
+`;
 
 const StyledForm = styled.div`
   padding: 15px 20px;
@@ -198,7 +202,7 @@ const StyledForm = styled.div`
   border: 1px solid #d9d9d9;
   border-top-width: 0;
   border-radius: 0 0 4px 4px;
-`
+`;
 
 const StyledRemove = styled.div`
   margin-top: 26px;
@@ -232,13 +236,13 @@ const StyledRemove = styled.div`
       border-color: red;
     }
   }
-`
+`;
 
 const StyledModal = styled(Modal)`
   position: fixed;
   width: 50%;
-`
+`;
 
 const StyledModalCont = styled(StyledRemove)`
   text-align: center;
-`
+`;

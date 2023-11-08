@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "lib": ["ES7", "DOM"],
-    // Type Checking Configuration
+    "allowJs": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "noFallthroughCasesInSwitch": true,
@@ -29,7 +30,8 @@
 
     // Interop Constraints Configuration
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*", "lib.d.ts"],
   "exclude": ["node_modules"],

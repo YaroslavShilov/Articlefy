@@ -1,16 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
-import moment from 'moment'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export type ArticleType = {
-  id: string | number
-  date: string
-  imgUrl?: string
-  title: string
-  text?: string
-  user?: string
-}
+  id: string | number;
+  date: string;
+  imgUrl?: string;
+  title: string;
+  text?: string;
+  user?: string;
+};
 
 export const Article: React.FC<ArticleType & { className?: string }> = ({
   id,
@@ -34,7 +34,7 @@ export const Article: React.FC<ArticleType & { className?: string }> = ({
 
     {text && <p>{text}</p>}
   </article>
-)
+);
 
 const StyledTitle = styled.div`
   display: flex;
@@ -67,7 +67,9 @@ const StyledTitle = styled.div`
       position: relative;
       display: inline-block;
 
-      font: 700 27px/32px 'EB Garamond', serif;
+      font:
+        700 27px/32px 'EB Garamond',
+        serif;
       color: black;
       text-decoration: none;
 
@@ -96,4 +98,4 @@ const StyledTitle = styled.div`
       opacity: 0.8;
     }
   } /*END h2*/
-`
+`;

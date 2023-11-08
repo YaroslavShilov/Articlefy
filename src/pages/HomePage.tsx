@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Article, ArticleType } from '../../components/Article';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchPartArticles, sortArticles } from '../../store/articlesSlice';
+import { Article, ArticleType } from '../components/Article';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { fetchPartArticles, sortArticles } from '../store/articlesSlice';
 import styled from 'styled-components';
-import { Loader } from '../../components/Loader';
+import { Loader } from '../components/Loader';
 
-export const Home = () => {
+const HomePage = () => {
   const [offset, setOffset] = useState(0);
   const [sort, setSort] = useState<'new' | 'old' | ''>('');
   const { pageArticles, loading, sorting, error } = useAppSelector<{
@@ -31,9 +31,11 @@ export const Home = () => {
     dispatch(sortArticles(type));
   };
 
-  if (error) return <h2 style={{ textAlign: 'center' }}>{error}</h2>;
+  if (error) return <h2 style={{ textAlign: 'center' }}>Home error: {error}</h2>;
 
   if (!pageArticles.list) return <Loader />;
+
+  console.log('page articles: ', pageArticles);
 
   return (
     <React.Fragment>
@@ -72,6 +74,8 @@ export const Home = () => {
     </React.Fragment>
   );
 };
+
+export default HomePage;
 
 const StyledArticle = styled(Article)`
   margin-bottom: 60px;

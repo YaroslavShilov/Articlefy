@@ -1,55 +1,53 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { Loader } from '../components/Loader'
-import styled from 'styled-components'
-import { addArticle } from '../store/articlesSlice'
-import { Modal } from '../components/Modal'
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { Loader } from '../components/Loader';
+import styled from 'styled-components';
+import { addArticle } from '../store/articlesSlice';
+import { Modal } from '../components/Modal';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   user: '',
   text: '',
   title: '',
   imgUrl: '',
-}
+};
 
-export const CreateArticle = () => {
-  const [state, setState] = useState<{ user: string; text: string; title: string; imgUrl: string }>(initialState)
-  const [success, setSuccess] = useState(false)
+const CreateArticlePage = () => {
+  const [state, setState] = useState<{ user: string; text: string; title: string; imgUrl: string }>(initialState);
+  const [success, setSuccess] = useState(false);
 
-  const { loading, error } = useAppSelector((state) => state.articles)
-  const dispatch = useAppDispatch()
+  const { loading, error } = useAppSelector((state) => state.articles);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onChange =
     (field: 'imgUrl' | 'user' | 'title' | 'text') => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setState({ ...state, [field]: e.target.value })
-    }
+      setState({ ...state, [field]: e.target.value });
+    };
 
   const onSubmit = (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const title = state.title.trim()
-    const text = state.text.trim()
+    const title = state.title.trim();
+    const text = state.text.trim();
 
     if (text && title) {
-      dispatch(
-        //@ts-ignore
-        addArticle({
-          user: state.user.trim(),
-          text,
-          title,
-          imgUrl: state.imgUrl.trim(),
-        })
-      )
+      //@ts-ignore
+      dispatch(addArticle({ user: state.user.trim(), text, title, imgUrl: state.imgUrl.trim() }));
 
-      setState(initialState)
-      setSuccess(true)
-      setTimeout(() => setSuccess(false), 3000)
+      setState(initialState);
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+        navigate('/');
+      }, 1500);
     }
-  }
+  };
 
-  if (error) return <h2 style={{ textAlign: 'center' }}>{error}</h2>
+  if (error) return <h2 style={{ textAlign: 'center' }}>{error}</h2>;
 
-  if (loading) return <Loader />
+  if (loading) return <Loader />;
 
   return (
     <StyledForm onSubmit={onSubmit}>
@@ -64,8 +62,8 @@ export const CreateArticle = () => {
 
       <Modal visible={success && !loading}>Your article was created</Modal>
     </StyledForm>
-  )
-}
+  );
+};
 
 const StyledForm = styled.form`
   position: relative;
@@ -130,7 +128,7 @@ const StyledForm = styled.form`
       transition: all 0.1s ease-in-out;
     }
   }
-`
+`;
 
 const StyledInputGroup = styled.div`
   display: flex;
@@ -141,4 +139,6 @@ const StyledInputGroup = styled.div`
     margin-left: 8px;
     margin-right: 8px;
   }
-`
+`;
+
+export default CreateArticlePage;

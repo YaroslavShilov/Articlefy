@@ -1,17 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 interface Props {
-  className?: string
-  visible: boolean
-  children: React.ReactNode
+  className?: string;
+  visible: boolean;
+  children: React.ReactNode;
 }
 
 export const Modal: React.FC<Props> = ({ className, children, visible }) => (
   <StyledModal className={className} theme={{ active: visible }}>
     {children}
   </StyledModal>
-)
+);
 
 const StyledModal = styled.div`
   position: absolute;
@@ -36,8 +36,8 @@ const StyledModal = styled.div`
   transition: all 0.5s ease-in-out;
 
   ${(props) =>
-    props.theme.active && {
+    props.theme['active'] && {
       opacity: 1,
       visibility: 'visible',
     }}
-`
+`;

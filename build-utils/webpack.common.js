@@ -13,13 +13,7 @@ module.exports = {
     clean: true,
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../src/template/index.html'),
-    }),
-    new ESLintWebpackPlugin(),
-    new WebpackManifestPlugin({}),
-  ],
+  plugins: [new ESLintWebpackPlugin(), new WebpackManifestPlugin({})],
 
   module: {
     rules: [

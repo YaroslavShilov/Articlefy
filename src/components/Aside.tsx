@@ -1,7 +1,7 @@
-import React from 'react'
-import { Search } from './Search'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React from 'react';
+import { Search } from './Search';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Aside = () => (
   <StyledAside>
@@ -33,13 +33,13 @@ export const Aside = () => (
       </StyledList>
     </nav>
   </StyledAside>
-)
+);
 
 const StyledAside = styled.aside`
   flex: 0 0 240px;
   padding-top: 38px;
   text-align: center;
-`
+`;
 
 const StyledList = styled.ul`
   padding: 0;
@@ -53,7 +53,9 @@ const StyledList = styled.ul`
     display: flex;
     align-items: center;
 
-    font: 700 18px/17px 'EB Garamond', serif;
+    font:
+      700 18px/17px 'EB Garamond',
+      serif;
     color: black;
 
     text-decoration: none;
@@ -74,7 +76,7 @@ const StyledList = styled.ul`
     flex: 0 0 auto;
     padding-left: 10px;
   }
-`
+`;
 
 const StyledLogo = styled(Link)`
   display: inline-block;
@@ -99,4 +101,4 @@ const StyledLogo = styled(Link)`
 
     transition: all 0.5s ease-in-out;
   }
-`
+`;

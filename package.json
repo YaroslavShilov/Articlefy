@@ -18,12 +18,16 @@
     "url": "https://github.com/YaroslavShilov/Articlefy/issues"
   },
   "homepage": "https://github.com/YaroslavShilov/Articlefy#readme",
+  "resolutions": {
+    "styled-components": "5"
+  },
   "devDependencies": {
     "@babel/core": "7.23.0",
     "@babel/eslint-parser": "7.22.15",
     "@babel/preset-env": "7.22.20",
     "@babel/preset-react": "7.22.15",
     "@types/node": "20.8.4",
+    "@types/styled-components": "5.1.28",
     "@typescript-eslint/eslint-plugin": "6.7.5",
     "@typescript-eslint/parser": "6.7.5",
     "babel-loader": "9.1.3",
@@ -43,6 +47,7 @@
     "postcss-preset-env": "9.2.0",
     "prettier": "3.0.3",
     "style-loader": "3.3.3",
+    "styled-components": "6.0.8",
     "terser-webpack-plugin": "5.3.9",
     "ts-loader": "9.5.0",
     "typescript": "5.2.2",
@@ -53,9 +58,13 @@
     "webpack-merge": "5.9.0"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "1.9.7",
     "@types/react": "18.2.27",
     "@types/react-dom": "18.2.12",
+    "moment": "2.29.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-redux": "8.1.3",
+    "react-router-dom": "6.16.0"
   }
 }

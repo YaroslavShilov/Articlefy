@@ -1,12 +1,12 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
-import styled from 'styled-components'
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { addComment } from '../store/commentsSlice'
-import { Loader } from './Loader'
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { addComment } from '../store/commentsSlice';
+import { Loader } from './Loader';
 
 interface Props {
-  articleId: string
-  className?: string
+  articleId: string;
+  className?: string;
 }
 
 export const CreateComment: React.FC<Props> = ({ className, articleId }) => {
@@ -14,18 +14,18 @@ export const CreateComment: React.FC<Props> = ({ className, articleId }) => {
     user: '',
     text: '',
     article: articleId,
-  })
+  });
 
-  const { loading, error } = useAppSelector((state) => state.comments.adding)
-  const dispatch = useAppDispatch()
+  const { loading, error } = useAppSelector((state) => state.comments.adding);
+  const dispatch = useAppDispatch();
 
   const onChange = (field: 'user' | 'text') => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setState({ ...state, [field]: e.target.value })
-  }
+    setState({ ...state, [field]: e.target.value });
+  };
 
   const onSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    const text = state.text.trim()
+    e.preventDefault();
+    const text = state.text.trim();
 
     if (text) {
       dispatch(
@@ -34,16 +34,16 @@ export const CreateComment: React.FC<Props> = ({ className, articleId }) => {
           ...state,
           text,
           user: state?.user?.trim() || 'Unknown',
-        })
-      )
+        }),
+      );
 
-      setState({ ...state, user: '', text: '' })
+      setState({ ...state, user: '', text: '' });
     }
-  }
+  };
 
-  if (error) return <h2 style={{ textAlign: 'center' }}>{error}</h2>
+  if (error) return <h2 style={{ textAlign: 'center' }}>{error}</h2>;
 
-  if (loading) return <Loader />
+  if (loading) return <Loader />;
 
   return (
     <StyledForm className={className} onSubmit={onSubmit}>
@@ -52,13 +52,15 @@ export const CreateComment: React.FC<Props> = ({ className, articleId }) => {
       <textarea placeholder="Message*" value={state.text} onChange={onChange('text')} required />
       <button>Add</button>
     </StyledForm>
-  )
-}
+  );
+};
 
 const StyledForm = styled.form`
   p {
     margin: 0;
-    font: 700 18px/26px 'EB Garamond', serif;
+    font:
+      700 18px/26px 'EB Garamond',
+      serif;
   }
 
   input,
@@ -122,4 +124,4 @@ const StyledForm = styled.form`
       transition: all 0.1s ease-in-out;
     }
   }
-`
+`;

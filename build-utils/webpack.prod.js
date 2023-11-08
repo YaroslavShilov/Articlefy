@@ -1,11 +1,16 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const getNodeModulesRegExp = (deps) => new RegExp(`[\\\\/]node_modules[\\\\/](${deps.join('|')})`);
 const excludeNodeModulesRegExp = (deps) =>
   new RegExp(`[\\\\/]node_modules[\\\\/](?!(${deps.length ? deps.join('|') : 'no module'})).*`);
 
-const deps = { react: ['react-dom', 'react-router-dom', 'react'] };
+const deps = {
+  react: ['react-dom', 'react-router-dom', 'react'],
+  moment: ['moment'],
+};
 const allDeps = Object.keys(deps).reduce((acc, key) => acc.concat(deps[key]), []);
 
 const getCacheGroup = (name, exclude) => ({
@@ -19,6 +24,9 @@ module.exports = {
   target: 'browserslist',
   devtool: 'source-map',
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../src/template/index.html'),
+    }),
     new MiniCssExtractPlugin({
       filename: '[contenthash:10].css',
     }),
@@ -41,11 +49,12 @@ module.exports = {
         moduleIds: 'deterministic',
         runtimeChunk: 'single',
         react: getCacheGroup('react'),
+        moment: getCacheGroup('moment'),
         vendor: getCacheGroup('vendor', true),
       },
     },
   },
   performance: {
-    hints: 'error',
+    hints: 'warning',
   },
 };

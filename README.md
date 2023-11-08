@@ -8,20 +8,22 @@
 [//]: # (- Add comments for articles)
 [//]: # (- Hide / Show comments button below the article)
 [//]: # (- Form for creating new comments &#40;the user can be an anonymous&#41;)
+[//]: # (- Skeleton loading)
+[//]: # (- Page 404)
 
 # Tools:
 ## Webpack:
-[//]: # (- Start project from scratch, own webpack settings)
-[//]: # (- webpack.config.js and webpack.prod.js)
-[//]: # (- html-webpack-plugin)
-[//]: # (- mini-css-extract-plugin)
-[//]: # (- source mapping)
-[//]: # (- Code splitting)
-[//]: # (- manifest.json)
-[//]: # (- Optimize images by using image-webpack-loader)
-[//]: # (- Tree shaking)
-[//]: # (- performance budgets)
-[//]: # (- HMR)
+- Start project from scratch, own webpack settings
+- webpack.config.js and webpack.prod.js
+- html-webpack-plugin
+- mini-css-extract-plugin
+- source mapping
+- Code splitting
+- manifest.json
+- Optimize images by using image-webpack-loader
+- Tree shaking
+- performance budgets
+- HMR
 - typescript
 - eslint
 - browserslist

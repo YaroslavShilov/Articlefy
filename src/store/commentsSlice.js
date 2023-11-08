@@ -1,47 +1,70 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { validate } from '../utils'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+// import { validate } from '../utils';
+import { DATA } from '../data';
+import { createId } from '../utils';
 
 export const fetchComments = createAsyncThunk(
   'comments/fetchComments',
   async (articleId, { rejectWithValue, dispatch, getState }) => {
     // check if we already have comments
-    let comments = getState().comments.list
+    let comments = getState().comments.list;
 
     try {
       if (!comments || !comments.length || (comments.length !== 0 && comments[0].article !== articleId)) {
-        const response = await fetch(`/api/comment?article=${articleId}`)
-        validate(response, "Sorry, I can't get comments, try later please")
-        const data = await response.json()
+        /* local server, changed this code to local storage
+       const response = await fetch(`/api/comment?article=${articleId}`);
+        validate(response, "Sorry, I can't get comments, try later please");
+        const data = await response.json();
 
-        comments = data.records
+        comments = data.records;*/
+
+        // if we have local comments, don't load them from the file
+        let data = JSON.parse(localStorage.getItem('comments'));
+        if (!data) {
+          localStorage.setItem('comments', JSON.stringify(DATA.comments));
+          data = DATA.comments;
+        }
+        comments = data.filter(({ article }) => article === articleId);
+
+        dispatch(addComments(comments));
+      } else {
+        dispatch(addComments(comments));
       }
-
-      dispatch(addComments(comments))
     } catch (err) {
-      return rejectWithValue(err.message)
+      return rejectWithValue(err.message);
     }
-  }
-)
+  },
+);
 
 export const addComment = createAsyncThunk('comments/addComment', async (comment, { rejectWithValue, dispatch }) => {
   try {
-    const response = await fetch(`/api/comment`, {
+    /* local server, changed this code to local storage
+   const response = await fetch(`/api/comment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(comment),
-    })
+    });
 
-    validate(response, "Sorry I can't add your comment, try later please")
+    validate(response, "Sorry I can't add your comment, try later please");
 
-    const data = await response.json()
+    const data = await response.json();
 
-    dispatch(pushComment(data))
+    dispatch(pushComment(data));*/
+
+    const newComment = {
+      ...comment,
+      id: createId(),
+    };
+
+    const data = JSON.parse(localStorage.getItem('comments'));
+    localStorage.setItem('comments', JSON.stringify([...data, newComment]));
+    dispatch(pushComment(newComment));
   } catch (err) {
-    rejectWithValue(err.message)
+    rejectWithValue(err.message);
   }
-})
+});
 
 const commentsSlice = createSlice({
   name: 'comments',
@@ -56,35 +79,35 @@ const commentsSlice = createSlice({
   },
   reducers: {
     addComments: (state, action) => {
-      state.list = action.payload
+      state.list = action.payload;
     },
     pushComment: (state, action) => {
-      state.list.push(action.payload)
+      state.list.push(action.payload);
     },
   },
   extraReducers: {
     [fetchComments.pending]: (state) => {
-      state.loading = true
+      state.loading = true;
     },
     [fetchComments.fulfilled]: (state) => {
-      state.loading = false
+      state.loading = false;
     },
     [fetchComments.rejected]: (state, action) => {
-      state.loading = false
-      state.error = action.payload
+      state.loading = false;
+      state.error = action.payload;
     },
     [addComment.pending]: (state) => {
-      state.adding.loading = true
+      state.adding.loading = true;
     },
     [addComment.fulfilled]: (state) => {
-      state.adding.loading = false
+      state.adding.loading = false;
     },
     [addComment.rejected]: (state, action) => {
-      state.adding.loading = false
-      state.adding.error = action.payload
+      state.adding.loading = false;
+      state.adding.error = action.payload;
     },
   },
-})
+});
 
-const { addComments, pushComment } = commentsSlice.actions
-export default commentsSlice.reducer
+const { addComments, pushComment } = commentsSlice.actions;
+export default commentsSlice.reducer;
