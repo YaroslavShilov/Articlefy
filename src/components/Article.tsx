@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 export type ArticleType = {
   id: string | number;
-  date: string;
+  date: Date;
   imgUrl?: string;
   title: string;
   text?: string;

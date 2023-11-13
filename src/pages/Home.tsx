@@ -5,7 +5,7 @@ import { fetchPartArticles, sortArticles } from '../store/articlesSlice';
 import styled from 'styled-components';
 import { Loader } from '../components/Loader';
 
-const HomePage = () => {
+const Home = () => {
   const [offset, setOffset] = useState(0);
   const [sort, setSort] = useState<'new' | 'old' | ''>('');
   const { pageArticles, loading, sorting, error } = useAppSelector<{
@@ -34,8 +34,6 @@ const HomePage = () => {
   if (error) return <h2 style={{ textAlign: 'center' }}>Home error: {error}</h2>;
 
   if (!pageArticles.list) return <Loader />;
-
-  console.log('page articles: ', pageArticles);
 
   return (
     <React.Fragment>
@@ -75,7 +73,7 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
 
 const StyledArticle = styled(Article)`
   margin-bottom: 60px;

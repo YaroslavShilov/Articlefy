@@ -13,7 +13,7 @@ const initialState = {
   imgUrl: '',
 };
 
-const CreateArticlePage = () => {
+const CreateArticle = () => {
   const [state, setState] = useState<{ user: string; text: string; title: string; imgUrl: string }>(initialState);
   const [success, setSuccess] = useState(false);
 
@@ -141,4 +141,4 @@ const StyledInputGroup = styled.div`
   }
 `;
 
-export default CreateArticlePage;
+export default CreateArticle;

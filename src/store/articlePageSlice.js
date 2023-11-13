@@ -37,17 +37,17 @@ const articlePageSlice = createSlice({
       state.item = action.payload;
     },
   },
-  extraReducers: {
-    [fetchArticle.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchArticle.pending, (state) => {
       state.loading = true;
-    },
-    [fetchArticle.fulfilled]: (state) => {
+    });
+    builder.addCase(fetchArticle.fulfilled, (state) => {
       state.loading = false;
-    },
-    [fetchArticle.rejected]: (state, action) => {
+    });
+    builder.addCase(fetchArticle.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
+    });
   },
 });
 

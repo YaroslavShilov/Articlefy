@@ -4,10 +4,10 @@ import { Article, ArticleType } from '../components/Article';
 import { fetchArticles } from '../store/articlesSlice';
 import { Loader } from '../components/Loader';
 import { useParams } from 'react-router-dom';
+import { Search as SearchBlock } from '../components/Search';
 import styled from 'styled-components';
-import { Search } from '../components/Search';
 
-const SearchPage = () => {
+const Search = () => {
   const [filtered, setFiltered] = useState<ArticleType[] | []>([]);
   const { title } = useParams();
   const { list, loading, error } = useAppSelector((state) => state.articles);
@@ -28,7 +28,7 @@ const SearchPage = () => {
   return (
     <React.Fragment>
       <h2>Search Page</h2>
-      <Search initialValue={title} />
+      <SearchBlock initialValue={title} />
       <StyledContent>
         {loading && <Loader />}
         {error && <h2 style={{ textAlign: 'center' }}>{error}</h2>}
@@ -50,4 +50,4 @@ const StyledContent = styled.div`
   padding: 40px 0;
 `;
 
-export default SearchPage;
+export default Search;

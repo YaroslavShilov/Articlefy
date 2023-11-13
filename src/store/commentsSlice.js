@@ -85,27 +85,28 @@ const commentsSlice = createSlice({
       state.list.push(action.payload);
     },
   },
-  extraReducers: {
-    [fetchComments.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchComments.pending, (state) => {
       state.loading = true;
-    },
-    [fetchComments.fulfilled]: (state) => {
+    });
+    builder.addCase(fetchComments.fulfilled, (state) => {
       state.loading = false;
-    },
-    [fetchComments.rejected]: (state, action) => {
+    });
+    builder.addCase(fetchComments.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-    [addComment.pending]: (state) => {
+    });
+
+    builder.addCase(addComment.pending, (state) => {
       state.adding.loading = true;
-    },
-    [addComment.fulfilled]: (state) => {
+    });
+    builder.addCase(addComment.fulfilled, (state) => {
       state.adding.loading = false;
-    },
-    [addComment.rejected]: (state, action) => {
+    });
+    builder.addCase(addComment.rejected, (state, action) => {
       state.adding.loading = false;
       state.adding.error = action.payload;
-    },
+    });
   },
 });
 

@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { fetchArticle } from '../store/articlePageSlice';
-import { Article, ArticleType } from '../components/Article';
+import { Article as ArticleBlock, ArticleType as ArticleBlockType } from '../components/Article';
 import { Loader } from '../components/Loader';
 import styled from 'styled-components';
-import { RootState } from '../store/store';
 import { Comment, CommentType } from '../components/Comment';
 import { fetchComments } from '../store/commentsSlice';
 import { CreateComment } from '../components/CreateComment';
@@ -13,8 +12,8 @@ import { Modal } from '../components/Modal';
 import { deleteArticle } from '../store/articlesSlice';
 
 //BEGIN TODO: Put this to it's slice
-interface articlePageType {
-  item: ArticleType | null;
+interface ArticleType {
+  item: ArticleBlockType | null;
   loading: boolean;
   error: string | null;
 }
@@ -26,17 +25,13 @@ interface CommentsType {
 }
 //END TODO: Put this to it's slice
 
-const ArticlePage = () => {
+const Article = () => {
   const { id } = useParams();
-  const {
-    articlePage,
-    comments,
-    articles: { deleting },
-  }: {
-    articlePage: articlePageType;
+  const { articlePage, comments, deleting } = useAppSelector<{
+    articlePage: ArticleType;
     comments: CommentsType;
-    articles: { deleting: boolean };
-  } = useAppSelector<RootState>((state) => state);
+    deleting: boolean;
+  }>(({ articlePage, comments, articles: { deleting } }) => ({ articlePage, comments, deleting }));
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -77,7 +72,7 @@ const ArticlePage = () => {
 
   return (
     <React.Fragment>
-      <Article {...articlePage.item} />
+      <ArticleBlock {...articlePage.item} />
 
       <StyledComments>
         <StyledCommentsHeader theme={{ active: showComments }} onClick={showCommentsHandler}>
@@ -132,6 +127,7 @@ const ArticlePage = () => {
           )}
         </StyledModalCont>
       </StyledModal>
+
       <StyledRemove>
         <button onClick={() => setDeleteModal(true)}>Delete this article</button>
       </StyledRemove>
@@ -139,7 +135,7 @@ const ArticlePage = () => {
   );
 };
 
-export default ArticlePage;
+export default Article;
 
 const StyledComments = styled.div`
   margin-top: 16px;

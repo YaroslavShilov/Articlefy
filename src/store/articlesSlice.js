@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // import { validate } from '../utils';
 import { DATA } from '../data';
 import { createId } from '../utils';
+import moment from 'moment/moment';
 
 export const fetchArticles = createAsyncThunk(
   'articles/fetchArticles',
@@ -194,7 +195,7 @@ export const addArticle = createAsyncThunk(
       const newArticle = {
         ...article,
         id: createId(),
-        date: new Date(),
+        date: moment().format(),
       };
 
       const data = [newArticle, ...list];
@@ -206,17 +207,17 @@ export const addArticle = createAsyncThunk(
   },
 );
 
-const setPending = (state) => {
-  state.loading = true;
-};
-
-const setFulfilled = (state) => {
-  state.loading = false;
-};
-
-const setRejected = (state, action) => {
-  state.loading = false;
-  state.error = action.payload;
+const commonExtraReducer = (name, builder) => {
+  builder.addCase(name.pending, (state) => {
+    state.loading = true;
+  });
+  builder.addCase(name.fulfilled, (state) => {
+    state.loading = false;
+  });
+  builder.addCase(name.rejected, (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  });
 };
 
 const articlesSlice = createSlice({
@@ -241,38 +242,30 @@ const articlesSlice = createSlice({
       state.pageArticles = action.payload;
     },
   },
-  extraReducers: {
-    [fetchPartArticles.pending]: setPending,
-    [fetchPartArticles.fulfilled]: setFulfilled,
-    [fetchPartArticles.rejected]: setRejected,
+  extraReducers: (builder) => {
+    commonExtraReducer(fetchPartArticles, builder);
+    commonExtraReducer(fetchArticles, builder);
+    commonExtraReducer(addArticle, builder);
 
-    [fetchArticles.pending]: setPending,
-    [fetchArticles.fulfilled]: setFulfilled,
-    [fetchArticles.rejected]: setRejected,
-
-    [addArticle.pending]: setPending,
-    [addArticle.fulfilled]: setFulfilled,
-    [addArticle.rejected]: setRejected,
-
-    [deleteArticle.pending]: (state) => {
+    builder.addCase(deleteArticle.pending, (state) => {
       state.deleting = true;
-    },
-    [deleteArticle.fulfilled]: (state) => {
+    });
+    builder.addCase(deleteArticle.fulfilled, (state) => {
       state.deleting = false;
-    },
-    [deleteArticle.rejected]: (state) => {
+    });
+    builder.addCase(deleteArticle.rejected, (state) => {
       state.deleting = false;
-    },
+    });
 
-    [sortArticles.pending]: (state) => {
+    builder.addCase(sortArticles.pending, (state) => {
       state.sorting = true;
-    },
-    [sortArticles.fulfilled]: (state) => {
+    });
+    builder.addCase(sortArticles.fulfilled, (state) => {
       state.sorting = false;
-    },
-    [sortArticles.rejected]: (state) => {
+    });
+    builder.addCase(sortArticles.rejected, (state) => {
       state.sorting = false;
-    },
+    });
   },
 });
 
