@@ -14,6 +14,7 @@ const Home = () => {
     sorting: boolean;
     error: string | null;
   }>((state) => state.articles);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

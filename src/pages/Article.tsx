@@ -10,6 +10,7 @@ import { fetchComments } from '../store/commentsSlice';
 import { CreateComment } from '../components/CreateComment';
 import { Modal } from '../components/Modal';
 import { deleteArticle } from '../store/articlesSlice';
+import { RootState } from '../store/store';
 
 //BEGIN TODO: Put this to it's slice
 interface ArticleType {
@@ -23,15 +24,17 @@ interface CommentsType {
   loading: boolean;
   error: string | null;
 }
+
+const getArticlePage = (state: RootState): ArticleType => state.articlePage;
+const getComments = (state: RootState): CommentsType => state.comments;
+const getArticles = (state: RootState) => state.articles;
 //END TODO: Put this to it's slice
 
 const Article = () => {
   const { id } = useParams();
-  const { articlePage, comments, deleting } = useAppSelector<{
-    articlePage: ArticleType;
-    comments: CommentsType;
-    deleting: boolean;
-  }>(({ articlePage, comments, articles: { deleting } }) => ({ articlePage, comments, deleting }));
+  const articlePage: ArticleType = useAppSelector(getArticlePage);
+  const comments: CommentsType = useAppSelector(getComments);
+  const { deleting }: { deleting: boolean } = useAppSelector(getArticles);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
