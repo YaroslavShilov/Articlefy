@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { addComment } from '../store/commentsSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { addComment } from '@/store/commentsSlice';
 import { Loader } from './Loader';
 
 interface Props {

@@ -1,11 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Loader = () => (
   <StyledLoader>
     <div />
   </StyledLoader>
-)
+);
 
 const StyledLoader = styled.div`
   display: flex;
@@ -62,4 +61,4 @@ const StyledLoader = styled.div`
       transform: rotate(1turn);
     }
   }
-`
+`;

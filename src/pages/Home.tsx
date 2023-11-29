@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Article, ArticleType } from '../components/Article';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchPartArticles, sortArticles } from '../store/articlesSlice';
+import { Fragment, useEffect, useState } from 'react';
+import { Article, ArticleType } from '@/components/Article';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { fetchPartArticles, sortArticles } from '@/store/articlesSlice';
 import styled from 'styled-components';
-import { Loader } from '../components/Loader';
+import { Loader } from '@/components/Loader';
 
 const Home = () => {
   const [offset, setOffset] = useState(0);
@@ -37,7 +37,7 @@ const Home = () => {
   if (!pageArticles.list) return <Loader />;
 
   return (
-    <React.Fragment>
+    <Fragment>
       <StyledSort>
         <p>Sort: </p>
         <button onClick={sortHandler('new')} disabled={sort === 'new'}>
@@ -51,7 +51,7 @@ const Home = () => {
       {sorting && <Loader />}
 
       {!sorting && (
-        <React.Fragment>
+        <Fragment>
           {pageArticles.list.map((article) => (
             <StyledArticle key={article.id} {...article} text="" />
           ))}
@@ -68,9 +68,9 @@ const Home = () => {
               </button>
             </StyledButtons>
           )}
-        </React.Fragment>
+        </Fragment>
       )}
-    </React.Fragment>
+    </Fragment>
   );
 };
 

@@ -1,9 +1,9 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { Loader } from '../components/Loader';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { Loader } from '@/components/Loader';
 import styled from 'styled-components';
-import { addArticle } from '../store/articlesSlice';
-import { Modal } from '../components/Modal';
+import { addArticle } from '@/store/articlesSlice';
+import { Modal } from '@/components/Modal';
 import { useNavigate } from 'react-router-dom';
 
 const initialState = {

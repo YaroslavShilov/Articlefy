@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchArticle } from '../store/articlePageSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { fetchArticle } from '@/store/articlePageSlice';
 import { Article as ArticleBlock, ArticleType as ArticleBlockType } from '../components/Article';
-import { Loader } from '../components/Loader';
+import { Loader } from '@/components/Loader';
 import styled from 'styled-components';
-import { Comment, CommentType } from '../components/Comment';
-import { fetchComments } from '../store/commentsSlice';
-import { CreateComment } from '../components/CreateComment';
-import { Modal } from '../components/Modal';
-import { deleteArticle } from '../store/articlesSlice';
-import { RootState } from '../store/store';
+import { Comment, CommentType } from '@/components/Comment';
+import { fetchComments } from '@/store/commentsSlice';
+import { CreateComment } from '@/components/CreateComment';
+import { Modal } from '@/components/Modal';
+import { deleteArticle } from '@/store/articlesSlice';
+import { RootState } from '@/store/store';
 
 //BEGIN TODO: Put this to it's slice
 interface ArticleType {
@@ -74,7 +74,7 @@ const Article = () => {
   if (articlePage.loading || !articlePage.item) return <Loader />;
 
   return (
-    <React.Fragment>
+    <Fragment>
       <ArticleBlock {...articlePage.item} />
 
       <StyledComments>
@@ -97,13 +97,13 @@ const Article = () => {
             {(comments.loading || !comments.list) && <Loader />}
 
             {!comments.loading && comments.list && (
-              <React.Fragment>
+              <Fragment>
                 {comments.list.length === 0 ? (
                   <h3 style={{ textAlign: 'center' }}>No comments yet</h3>
                 ) : (
                   comments.list.map((comment) => <StyledComment key={comment.id} {...comment} />)
                 )}
-              </React.Fragment>
+              </Fragment>
             )}
           </StyledCommentsList>
         )}
@@ -117,16 +117,16 @@ const Article = () => {
       <StyledModal visible={deleteModal}>
         <StyledModalCont>
           {deleting ? (
-            <React.Fragment>
+            <Fragment>
               <h3>Deleting</h3>
               <Loader />
-            </React.Fragment>
+            </Fragment>
           ) : (
-            <React.Fragment>
+            <Fragment>
               <h3>Do you want to delete this article?</h3>
               <button onClick={deleteArticleHandler}>Yes</button>
               <button onClick={() => setDeleteModal(false)}>No</button>
-            </React.Fragment>
+            </Fragment>
           )}
         </StyledModalCont>
       </StyledModal>
@@ -134,7 +134,7 @@ const Article = () => {
       <StyledRemove>
         <button onClick={() => setDeleteModal(true)}>Delete this article</button>
       </StyledRemove>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

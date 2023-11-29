@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 export interface CommentType {
-  id: number | string
-  user: string
-  text: string
-  article: string
-  className?: string
+  id: number | string;
+  user: string;
+  text: string;
+  article: string;
+  className?: string;
 }
 
 export const Comment: React.FC<CommentType> = ({ className, user, text }) => (
@@ -23,7 +23,7 @@ export const Comment: React.FC<CommentType> = ({ className, user, text }) => (
     </h4>
     <p>{text}</p>
   </StyledComment>
-)
+);
 
 const StyledComment = styled.div`
   &:hover svg {
@@ -44,7 +44,9 @@ const StyledComment = styled.div`
     }
 
     span {
-      font: 700 18px/26px 'EB Garamond', serif;
+      font:
+        700 18px/26px 'EB Garamond',
+        serif;
     }
   }
 
@@ -52,4 +54,4 @@ const StyledComment = styled.div`
     margin: 10px 0 0;
     padding-left: 40px;
   }
-`
+`;
