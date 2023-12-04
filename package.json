@@ -1,22 +1,14 @@
 {
+  "homepage": "http://YaroslavShilov.github.io/Articlefy",
   "name": "articlefy",
   "version": "1.0.0",
-  "description": "- Home page with pagination - Filter by date - Search by name - Implement creating a new article - After adding a new article, that should appear the first in the list. - Implement removing an article but it should remove only from the redux-store (also add the text, that it will remove the article only from the redux-store) - Add comments for articles - Hide / Show comments button below the article - Form for creating new comments (the user can be an anonymous)",
-  "main": "index.js",
   "scripts": {
     "start": "webpack serve --env mode=development",
-    "build": "webpack --env mode=production"
+    "build": "webpack --env mode=production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/YaroslavShilov/Articlefy.git"
-  },
-  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/YaroslavShilov/Articlefy/issues"
-  },
-  "homepage": "https://github.com/YaroslavShilov/Articlefy#readme",
   "resolutions": {
     "styled-components": "5"
   },
@@ -49,6 +41,7 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-webpack-plugin": "4.0.1",
     "fork-ts-checker-webpack-plugin": "9.0.2",
+    "gh-pages": "6.1.0",
     "html-webpack-plugin": "5.5.3",
     "image-webpack-loader": "8.1.0",
     "mini-css-extract-plugin": "2.7.6",
@@ -77,7 +70,7 @@
     "moment": "2.29.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.20.0",
-    "react-redux": "8.1.3"
+    "react-redux": "8.1.3",
+    "react-router-dom": "6.20.0"
   }
 }
