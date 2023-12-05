@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkarticlefy=self.webpackChunkarticlefy||[]).push([[725],{2794:function(e,r,c){c.r(r);var n=c(5893),i=c(9655);r.default=function(){return(0,n.jsxs)("div",{children:[(0,n.jsx)("h1",{children:"Page 404"}),(0,n.jsx)("p",{children:(0,n.jsx)(i.rU,{to:"/",children:"Home"})})]})}}}]);
-//# sourceMappingURL=page-404.f967e6e490.chunk.js.map
